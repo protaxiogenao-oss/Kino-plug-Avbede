@@ -1,35 +1,34 @@
 {
-  "id": "avbebe",
-  "name": "Avbebe",
+  "id": "tubepornclassic",
+  "name": "TubePornClassic",
   "version": "1.0.0",
   "apiVersion": 6,
   "entry": "plugin.js",
-  "description": "avbebe.com — H動畫、3D、華語AV、馬賽克破解. HLS vía 52cute. Solo +18.",
+  "description": "Vídeos clásicos de tubepornclassic.com. Solo +18. Home, búsqueda, MP4 con selector de calidad. streamHosts any para el CDN.",
   "author": "community",
-  "homepage": "https://avbebe.com",
+  "homepage": "https://tubepornclassic.com",
   "icon": "icon.png",
   "hosts": [
-    "avbebe.com",
-    "www.avbebe.com",
-    "*.avbebe.com",
-    "52cute.com",
-    "www.52cute.com",
-    "*.52cute.com"
+    "tubepornclassic.com",
+    "www.tubepornclassic.com",
+    "*.tubepornclassic.com",
+    "tn.tubepornclassic.com"
   ],
   "streamHosts": "any",
-  "browser": true,
   "capabilities": ["search", "home", "browse", "resolve"],
-  "color": "#FF69B4",
   "categories": ["adult"],
+  "color": "#C2185B",
   "settings": [
     {
       "key": "quality",
       "label": "Calidad preferida",
       "type": "select",
-      "default": "hls",
+      "default": "best",
       "options": [
-        { "value": "hls", "label": "HLS auto (mejor)" },
-        { "value": "best", "label": "Automática" }
+        { "value": "best", "label": "Mejor disponible" },
+        { "value": "1080", "label": "Preferir 1080p" },
+        { "value": "720", "label": "Preferir 720p" },
+        { "value": "480", "label": "Preferir 480p" }
       ]
     }
   ]
