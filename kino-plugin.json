@@ -1,0 +1,15 @@
+{
+  "id": "avbebe",
+  "name": "Avbebe",
+  "version": "1.0.0",
+  "apiVersion": 6,
+  "entry": "plugin.js",
+  "description": "H動畫, 3D y AV de avbebe.com vía StreamWish (adultos)",
+  "author": "yumehotaru41",
+  "hosts": ["avbebe.com", "avbebe.love", "avbebe.org"],
+  "streamHosts": "any",
+  "capabilities": ["search", "resolve"],
+  "config": [
+    { "key": "mirror", "title": "Mirror", "type": "string", "default": "https://avbebe.com" }
+  ]
+}
