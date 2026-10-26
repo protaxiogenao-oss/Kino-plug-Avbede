@@ -4,12 +4,33 @@
   "version": "1.0.0",
   "apiVersion": 6,
   "entry": "plugin.js",
-  "description": "H動畫, 3D y AV de avbebe.com vía StreamWish (adultos)",
-  "author": "yumehotaru41",
-  "hosts": ["avbebe.com", "avbebe.love", "avbebe.org"],
+  "description": "avbebe.com — H動畫、3D、華語AV、馬賽克破解. HLS vía 52cute. Solo +18.",
+  "author": "community",
+  "homepage": "https://avbebe.com",
+  "icon": "icon.png",
+  "hosts": [
+    "avbebe.com",
+    "www.avbebe.com",
+    "*.avbebe.com",
+    "52cute.com",
+    "www.52cute.com",
+    "*.52cute.com"
+  ],
   "streamHosts": "any",
-  "capabilities": ["search", "resolve"],
-  "config": [
-    { "key": "mirror", "title": "Mirror", "type": "string", "default": "https://avbebe.com" }
+  "browser": true,
+  "capabilities": ["search", "home", "browse", "resolve"],
+  "color": "#FF69B4",
+  "categories": ["adult"],
+  "settings": [
+    {
+      "key": "quality",
+      "label": "Calidad preferida",
+      "type": "select",
+      "default": "hls",
+      "options": [
+        { "value": "hls", "label": "HLS auto (mejor)" },
+        { "value": "best", "label": "Automática" }
+      ]
+    }
   ]
 }
