@@ -223,17 +223,36 @@ function mapVideos(data) {
   return items;
 }
 
-async function rowFrom(sort, id, title, limit, section, objectId) {
+/**
+ * Build a home/browse row. If excludeIds is a Set, drop videos already shown
+ * in earlier rows so Home does not repeat the same title everywhere.
+ * minKeep: skip the whole row if fewer than this remain after dedupe
+ * (avoids near-empty or near-duplicate category strips).
+ */
+async function rowFrom(sort, id, title, limit, section, objectId, excludeIds, minKeep) {
   try {
-    const path = videosListPath(sort, 1, limit || 60, section, objectId);
+    const path = videosListPath(sort, 1, Math.max(limit || 60, 60), section, objectId);
     const data = await fetchJson(path);
-    const items = mapVideos(data);
-    if (!items.length) return null;
+    let items = mapVideos(data);
+    if (excludeIds && excludeIds.size) {
+      items = items.filter(function (it) {
+        return !excludeIds.has(it.id);
+      });
+    }
+    const need = minKeep != null ? minKeep : 8;
+    if (items.length < need) return null;
+    items = items.slice(0, limit || 60);
+    if (excludeIds) {
+      for (let i = 0; i < items.length; i++) excludeIds.add(items[i].id);
+    }
     return {
       id: id,
       title: title,
-      items: items.slice(0, limit || 60),
-      ref: "sort:" + sort + (section ? ":" + section + ":" + (objectId || "") : ""),
+      items: items,
+      ref:
+        "sort:" +
+        sort +
+        (section ? ":" + section + ":" + (objectId || "") : ""),
       genre: "otros",
     };
   } catch (e) {
@@ -283,6 +302,10 @@ export async function search(query) {
 export async function home() {
   await null;
   const rows = [];
+  // Videos already used in an earlier row — later rows only keep exclusive items
+  const seen = new Set();
+
+  // Global sorts are distinct lists (verified against the API).
   const specs = [
     ["latest-updates", "latest", "Recién agregados"],
     ["most-popular", "popular", "Más populares"],
@@ -290,15 +313,24 @@ export async function home() {
     ["longest", "longest", "Más largos"],
   ];
   for (let i = 0; i < specs.length; i++) {
-    const row = await rowFrom(specs[i][0], specs[i][1], specs[i][2], 60);
+    const row = await rowFrom(
+      specs[i][0],
+      specs[i][1],
+      specs[i][2],
+      60,
+      "",
+      "",
+      seen,
+      6
+    );
     if (row) rows.push(row);
   }
 
-  // Category rows (classic / vintage focus of the site)
+  // Categories: classic / retro / vintage return THE SAME 24 ids on this site
+  // (100% overlap). Keep a single "Clásicos" strip. Niche tags filter correctly
+  // but share some multi-tagged videos — dedupe via `seen`.
   const cats = [
-    ["classic", "Classic"],
-    ["retro", "Retro"],
-    ["vintage", "Vintage"],
+    ["classic", "Clásicos"],
     ["categories-anal", "Anal"],
     ["big-boobs", "Big Tits"],
     ["big-butts", "Big Ass"],
@@ -314,7 +346,9 @@ export async function home() {
       cats[i][1],
       48,
       "categories",
-      cats[i][0]
+      cats[i][0],
+      seen,
+      8
     );
     if (row) rows.push(row);
   }

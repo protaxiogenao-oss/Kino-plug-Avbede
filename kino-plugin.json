@@ -1,10 +1,10 @@
 {
   "id": "tubepornclassic",
   "name": "TubePornClassic",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "apiVersion": 6,
   "entry": "plugin.js",
-  "description": "Vídeos clásicos de tubepornclassic.com. Solo +18. Home, búsqueda, MP4 con selector de calidad. streamHosts any para el CDN.",
+  "description": "Vídeos clásicos de tubepornclassic.com. Solo +18. Filas sin duplicados; categorías con contenido propio.",
   "author": "community",
   "homepage": "https://tubepornclassic.com",
   "icon": "icon.png",
@@ -15,8 +15,15 @@
     "tn.tubepornclassic.com"
   ],
   "streamHosts": "any",
-  "capabilities": ["search", "home", "browse", "resolve"],
-  "categories": ["adult"],
+  "capabilities": [
+    "search",
+    "home",
+    "browse",
+    "resolve"
+  ],
+  "categories": [
+    "adult"
+  ],
   "color": "#C2185B",
   "settings": [
     {
@@ -25,10 +32,22 @@
       "type": "select",
       "default": "best",
       "options": [
-        { "value": "best", "label": "Mejor disponible" },
-        { "value": "1080", "label": "Preferir 1080p" },
-        { "value": "720", "label": "Preferir 720p" },
-        { "value": "480", "label": "Preferir 480p" }
+        {
+          "value": "best",
+          "label": "Mejor disponible"
+        },
+        {
+          "value": "1080",
+          "label": "Preferir 1080p"
+        },
+        {
+          "value": "720",
+          "label": "Preferir 720p"
+        },
+        {
+          "value": "480",
+          "label": "Preferir 480p"
+        }
       ]
     }
   ]
