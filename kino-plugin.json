@@ -1,11 +1,11 @@
 {
   "id": "tubepornclassic",
   "name": "TubePornClassic",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "apiVersion": 6,
   "entry": "plugin.js",
-  "description": "Vídeos clásicos de tubepornclassic.com. Solo +18. Filas sin duplicados; categorías con contenido propio.",
-  "author": "community",
+  "description": "Hecho por Hotaru Yume. Videos clásicos de tubepornclassic.com. Solo +18.",
+  "author": "Hotaru Yume",
   "homepage": "https://tubepornclassic.com",
   "icon": "icon.png",
   "hosts": [
